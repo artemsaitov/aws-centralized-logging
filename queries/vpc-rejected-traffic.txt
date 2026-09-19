@@ -1,0 +1,4 @@
+fields @timestamp, srcAddr, dstAddr, srcPort, dstPort, protocol, action
+| filter action = "REJECT"
+| sort @timestamp desc
+| limit 50

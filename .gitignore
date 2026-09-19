@@ -1,0 +1,17 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Terraform variable files may contain sensitive values
+*.tfvars
+!*.tfvars.example
+
+# macOS
+.DS_Store
+*.zip
+
+# IDE
+.vscode/
+.idea/
