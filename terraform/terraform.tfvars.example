@@ -1,0 +1,2 @@
+# AWS region used for deployment
+aws_region = "us-west-1"
