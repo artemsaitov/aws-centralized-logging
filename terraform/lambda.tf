@@ -28,6 +28,22 @@ resource "aws_iam_role_policy_attachment" "lambda_logging" {
   role       = aws_iam_role.lambda_logging.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+
+resource "aws_lambda_function" "logging_demo" {
+  function_name = "centralized-logging-demo"
+
+  filename         = data.archive_file.lambda.output_path
+  source_code_hash = data.archive_file.lambda.output_base64sha256
+
+  role    = aws_iam_role.lambda_logging.arn
+  handler = "index.handler"
+  runtime = "python3.12"
+
+  depends_on = [
+    aws_iam_role_policy_attachment.lambda_logging
+  ]
+}
+
 resource "aws_cloudwatch_log_group" "lambda" {
   name              = "/aws/lambda/centralized-logging-demo"
   retention_in_days = 7

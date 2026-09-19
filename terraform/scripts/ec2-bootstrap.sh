@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-dnf install -y amazon-cloudwatch-agent
+dnf install -y amazon-cloudwatch-agent rsyslog
+
+systemctl enable rsyslog
+systemctl start rsyslog
 
 mkdir -p /var/log/myapp
 touch /var/log/myapp/application.log
